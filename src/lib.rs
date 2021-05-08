@@ -7,14 +7,14 @@ pub struct RingPtr {
     max: usize,
 }
 impl RingPtr {
-    fn new(len: usize) -> RingPtr {
+    pub fn new(len: usize) -> RingPtr {
         RingPtr {
             top: 0,
             end: 0,
             max: len,
         }
     }
-    fn push(&mut self) -> Option<usize> {
+    pub fn push(&mut self) -> Option<usize> {
         let mut next = self.top + 1;
         if next >= self.max { next = 0; }
         if next == self.end { return None; }
@@ -23,14 +23,14 @@ impl RingPtr {
         if self.top >= self.max { self.top = 0; }
         Some(rslt)
     }
-    fn pop(&mut self) -> Option<usize> {
+    pub fn pop(&mut self) -> Option<usize> {
         if self.top == self.end { return None; }
         let rslt = self.end;
         self.end += 1;
         if self.end >= self.max { self.end = 0; }
         Some(rslt)
     }
-    fn get_left(&self) -> usize {
+    pub fn get_left(&self) -> usize {
         if self.end > self.top {
             return self.end - self.top - 1;
         }
